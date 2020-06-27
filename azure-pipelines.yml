@@ -44,3 +44,4 @@ steps:
     isPreRelease: true
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+    assets: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
