@@ -49,7 +49,7 @@ steps:
     target: '$(Build.SourceVersion)'
     tagSource: userSpecifiedTag
     tag: $(Build.BuildNumber)
-    isPreRelease: true
+    isPreRelease: false
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
     assets: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
