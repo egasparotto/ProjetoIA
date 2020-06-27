@@ -39,7 +39,8 @@ steps:
     repositoryName: 'egasparotto/ProjetoIA'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
+    tagSource: userSpecifiedTag
+    tag: $(Build.BuildNumber)
     isPreRelease: true
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
