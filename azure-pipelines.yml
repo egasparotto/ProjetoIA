@@ -29,6 +29,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'd:\a\1\s\ProjetoIA.Dominio\bin\Release\netcoreapp3.1\'
+    PathtoPublish: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
     ArtifactName: 'drop'
     publishLocation: 'Container'
