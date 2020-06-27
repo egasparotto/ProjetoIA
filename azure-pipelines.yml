@@ -1,0 +1,55 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
+    replaceExistingArchive: true
+
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'Github EGasparotto'
+    repositoryName: 'egasparotto/ProjetoIA'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: userSpecifiedTag
+    tag: $(Build.BuildNumber)
+    isPreRelease: false
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
+    assets: '$(Build.ArtifactStagingDirectory)/Executavel.zip'

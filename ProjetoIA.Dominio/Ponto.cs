@@ -26,42 +26,22 @@ namespace ProjetoIA.Dominio
             grid.Children.Add(this);
         }
 
-        private void Refresh(Action funcao)
-        {
-            Dispatcher.Invoke(DispatcherPriority.Background, funcao);
-        }
 
         public void Norte()
         {
-            Refresh(() =>
-            {
-                Grid.SetRow(this, Grid.GetRow(this) - 1);
-            });
-            Thread.Sleep(1000);
+            Grid.SetRow(this, Grid.GetRow(this) - 1);
         }
         public void Sul()
         {
-            Refresh(() =>
-            {
-                Grid.SetRow(this, Grid.GetRow(this) + 1);
-            });
-            Thread.Sleep(1000);
+            Grid.SetRow(this, Grid.GetRow(this) + 1);
         }
         public void Leste()
         {
-            Refresh(() =>
-            {
-                Grid.SetColumn(this, Grid.GetColumn(this) + 1);
-            });
-            Thread.Sleep(1000);
+            Grid.SetColumn(this, Grid.GetColumn(this) + 1);
         }
         public void Oeste()
         {
-            Refresh(() =>
-            {
-                Grid.SetColumn(this, Grid.GetColumn(this) - 1);
-            });
-            Thread.Sleep(1000);
+            Grid.SetColumn(this, Grid.GetColumn(this) - 1);
         }
     }
 }

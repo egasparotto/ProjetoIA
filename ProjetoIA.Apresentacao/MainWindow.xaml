@@ -14,9 +14,19 @@
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button x:Name="btnProximo" Click="btnProximo_Click">
-            Proximo
-        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Button x:Name="btnProximo" Click="btnProximo_Click" Grid.Column="0" Grid.Row="1">
+                Proximo
+            </Button>
+        </Grid>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0">
             <Grid x:Name="grdLabirinto" Background="White">
                 <Grid.ColumnDefinitions>
