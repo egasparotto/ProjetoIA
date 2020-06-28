@@ -1,7 +1,7 @@
-﻿using ProjetoIA.Dominio.Entidades;
-using ProjetoIA.Dominio.Enumeradores;
-using ProjetoIA.Dominio.Interfaces;
-using ProjetoIA.Dominio.Servicos;
+﻿using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Ponto.Entidades;
+using ProjetoIA.Dominio.Ponto.Enumeradores;
 
 using System.Windows;
 using System.Windows.Controls;

@@ -1,4 +1,4 @@
-﻿namespace ProjetoIA.Dominio.Enumeradores
+﻿namespace ProjetoIA.Dominio.Ponto.Enumeradores
 {
     public enum EnumeradorDeLocalizacaoDoPonto
     {

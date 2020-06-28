@@ -1,6 +1,7 @@
-﻿using System;
+﻿
+using System;
 
-namespace ProjetoIA.Dominio.Servicos
+namespace ProjetoIA.Dominio.Base
 {
     public static class IoC
     {

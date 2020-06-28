@@ -1,8 +1,8 @@
 ﻿using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio.Entidades;
-using ProjetoIA.Dominio.Enumeradores;
-using ProjetoIA.Dominio.Interfaces;
-using ProjetoIA.Dominio.Servicos;
+using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Movimentacao.Servicos;
+using ProjetoIA.Dominio.Ponto.Entidades;
+using ProjetoIA.Dominio.Ponto.Enumeradores;
 
 using System.Windows;
 
@@ -30,7 +30,7 @@ namespace ProjetoIA.Apresentacao
         {
             var servicoDeMovimentacao = IoC.ObterServico<IServicoDeMovimentacaoDoPonto>();
 
-            await servicoDeMovimentacao.Mover(ponto,EnumeradorDeMovimentoDoPonto.Norte);
+            await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Norte);
             await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Leste);
             await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul);
             await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Oeste);

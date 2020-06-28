@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using ProjetoIA.Dominio.Servicos;
+using ProjetoIA.Dominio.Base;
 
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace ProjetoIA.Apresentacao
 {
