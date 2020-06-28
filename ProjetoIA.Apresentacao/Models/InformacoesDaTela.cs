@@ -1,6 +1,10 @@
-﻿using System;
+﻿using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Interface.Servicos;
+
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace ProjetoIA.Apresentacao.Models
 {
@@ -17,6 +21,21 @@ namespace ProjetoIA.Apresentacao.Models
             set
             {
                 numeroDeGeracoes = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int penalidade;
+
+        public Int32 Penalidade
+        {
+            get
+            {
+                return penalidade;
+            }
+            set
+            {
+                penalidade = value;
                 NotifyPropertyChanged();
             }
         }
@@ -38,5 +57,10 @@ namespace ProjetoIA.Apresentacao.Models
             NumeroDeGeracoes++;
         }
 
+        public async Task IncrementarPenalidade(int penalidade)
+        {
+            Penalidade += penalidade;
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizaTela();
+        }
     }
 }

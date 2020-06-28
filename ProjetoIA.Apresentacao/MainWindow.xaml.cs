@@ -29,12 +29,13 @@ namespace ProjetoIA.Apresentacao
         private async void btnProximo_Click(object sender, RoutedEventArgs e)
         {
             var servicoDeMovimentacao = IoC.ObterServico<IServicoDeMovimentacaoDoPonto>();
+            var informacoesDaTela = IoC.ObterServico<InformacoesDaTela>();
 
-            await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Norte);
-            await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Leste);
-            await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul);
-            await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Oeste);
-            IoC.ObterServico<InformacoesDaTela>().IncrementarGeracao();
+            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul));
+            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Leste));
+            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul));
+            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Oeste));
+            informacoesDaTela.IncrementarGeracao();
         }
     }
 }

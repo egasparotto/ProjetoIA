@@ -22,7 +22,20 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Numero de Gerações: </Label>
+                <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"></Label>
+                <Label Grid.Row="1" Grid.Column="0">Penalidade:</Label>
+                <Label Content="{Binding Path=Penalidade, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></Label>
+            </Grid>
             <Button x:Name="btnProximo" Click="btnProximo_Click" Grid.Column="0" Grid.Row="1">
                 Proximo
             </Button>

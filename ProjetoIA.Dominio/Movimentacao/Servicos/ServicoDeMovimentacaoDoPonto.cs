@@ -1,5 +1,7 @@
 ﻿using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Penalidade.Enumeradores;
+using ProjetoIA.Dominio.Penalidades.Servico;
 using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Ponto.Enumeradores;
 
@@ -11,6 +13,12 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
     {
         public async Task<int> Mover(IPonto ponto, EnumeradorDeMovimentoDoPonto movimento)
         {
+            var penalidade = IoC.ObterServico<IServicoDePenalidade>().CalcularPenalidade(movimento, ponto.ObterLocalizacao());
+
+            if(penalidade == EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto)
+            {
+                return 200;
+            }
             int novoLocal;
             if (movimento == EnumeradorDeMovimentoDoPonto.Norte)
             {
@@ -31,6 +39,11 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
 
             ponto.DefinirLocalizacao((EnumeradorDeLocalizacaoDoPonto)novoLocal);
             await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(ponto);
+
+            if (penalidade == EnumeradorDeResultadoDaMovimentacao.AtravessaParede)
+            {
+                return 100;
+            }
 
             return 0;
         }
