@@ -50,5 +50,17 @@ namespace ProjetoIA.Apresentacao.Controllers
             await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);
         }
 
+        public async Task IncrementarGeracao()
+        {
+            IoC.ObterServico<InformacoesDaTela>().NumeroDeGeracoes++;
+            await AtualizaTela();
+        }
+
+        public async Task IncrementarPenalidade(int penalidade)
+        {
+            IoC.ObterServico<InformacoesDaTela>().Penalidade += penalidade;
+            await AtualizaTela();
+        }
+
     }
 }

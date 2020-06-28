@@ -1,5 +1,6 @@
-﻿using ProjetoIA.Dominio.Penalidade.Enumeradores;
-using ProjetoIA.Dominio.Ponto.Enumeradores;
+﻿using ProjetoIA.Dominio.Individuos.Enumeradores;
+using ProjetoIA.Dominio.Movimentacao.Enumeradores;
+using ProjetoIA.Dominio.Penalidade.Enumeradores;
 
 using System;
 using System.Collections.Generic;
@@ -9,53 +10,53 @@ namespace ProjetoIA.Dominio.Penalidades.Servico
 {
     public class ServicoDePenalidade : IServicoDePenalidade
     {
-        protected readonly IDictionary<EnumeradorDeMovimentoDoPonto, IDictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>> movimentosInvalidos = new Dictionary<EnumeradorDeMovimentoDoPonto, IDictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>>()
+        protected readonly IDictionary<EnumeradorDeMovimentoDoIndividuo, IDictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>> movimentosInvalidos = new Dictionary<EnumeradorDeMovimentoDoIndividuo, IDictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>>()
         {
             {
-                EnumeradorDeMovimentoDoPonto.Norte, new Dictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.Norte, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local2x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x1, EnumeradorDeResultadoDaMovimentacao.AtravessaParede },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local2x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x1, EnumeradorDeResultadoDaMovimentacao.AtravessaParede },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
                 }
             },
             {
-                EnumeradorDeMovimentoDoPonto.Sul, new Dictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.Sul, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local2x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local2x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
                 }
             },
             {
-                EnumeradorDeMovimentoDoPonto.Leste, new Dictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.Leste, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x2, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x1, EnumeradorDeResultadoDaMovimentacao.AtravessaParede },
-                    { EnumeradorDeLocalizacaoDoPonto.Local1x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x2, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x1, EnumeradorDeResultadoDaMovimentacao.AtravessaParede },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local1x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
                 }
             },
             {
-                EnumeradorDeMovimentoDoPonto.Oeste, new Dictionary<EnumeradorDeLocalizacaoDoPonto, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.Oeste, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x2, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local0x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
-                    { EnumeradorDeLocalizacaoDoPonto.Local3x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x2, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local0x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
+                    { EnumeradorDeLocalizacaoDoIndividuo.Local3x2, EnumeradorDeResultadoDaMovimentacao.AtravessaParede }
                 }
             },
         };
 
-        public EnumeradorDeResultadoDaMovimentacao CalcularPenalidade(EnumeradorDeMovimentoDoPonto movimentoDoPonto, EnumeradorDeLocalizacaoDoPonto localizacaoAtual)
+        public EnumeradorDeResultadoDaMovimentacao CalcularPenalidade(EnumeradorDeMovimentoDoIndividuo movimentoDoPonto, EnumeradorDeLocalizacaoDoIndividuo localizacaoAtual)
         {
             var localizacoesInvalidas = movimentosInvalidos[movimentoDoPonto];
             if (localizacoesInvalidas.TryGetValue(localizacaoAtual, out EnumeradorDeResultadoDaMovimentacao resultado))

@@ -10,7 +10,7 @@ namespace ProjetoIA.Apresentacao.Models
 {
     public class InformacoesDaTela : INotifyPropertyChanged
     {
-        private int numeroDeGeracoes;
+        private int numeroDeGeracoes = 1;
 
         public Int32 NumeroDeGeracoes
         {
@@ -50,17 +50,6 @@ namespace ProjetoIA.Apresentacao.Models
         protected virtual void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void IncrementarGeracao()
-        {
-            NumeroDeGeracoes++;
-        }
-
-        public async Task IncrementarPenalidade(int penalidade)
-        {
-            Penalidade += penalidade;
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizaTela();
         }
     }
 }

@@ -36,8 +36,8 @@
                 <Label Grid.Row="1" Grid.Column="0">Penalidade:</Label>
                 <Label Content="{Binding Path=Penalidade, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></Label>
             </Grid>
-            <Button x:Name="btnProximo" Click="btnProximo_Click" Grid.Column="0" Grid.Row="1">
-                Proximo
+            <Button x:Name="btnIniciar" Click="btnIniciar_Click" Grid.Column="0" Grid.Row="1">
+                Iniciar
             </Button>
         </Grid>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0">

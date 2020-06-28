@@ -1,7 +1,7 @@
 ﻿using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
-using ProjetoIA.Dominio.Ponto.Enumeradores;
 
 using System.Windows;
 using System.Windows.Controls;
@@ -11,14 +11,14 @@ namespace ProjetoIA.Apresentacao.Models
 {
     public class Ponto : Label, IPonto
     {
-        private EnumeradorDeLocalizacaoDoPonto local;
+        private EnumeradorDeLocalizacaoDoIndividuo local;
 
-        public EnumeradorDeLocalizacaoDoPonto ObterLocalizacao()
+        public EnumeradorDeLocalizacaoDoIndividuo ObterLocalizacao()
         {
             return local;
         }
 
-        public void DefinirLocalizacao(EnumeradorDeLocalizacaoDoPonto value)
+        public void DefinirLocalizacao(EnumeradorDeLocalizacaoDoIndividuo value)
         {
             local = value;
         }
@@ -35,7 +35,7 @@ namespace ProjetoIA.Apresentacao.Models
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
-            DefinirLocalizacao(EnumeradorDeLocalizacaoDoPonto.Local0x3);
+            DefinirLocalizacao(EnumeradorDeLocalizacaoDoIndividuo.Local0x3);
 
             IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
 

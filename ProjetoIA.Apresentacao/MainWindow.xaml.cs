@@ -1,8 +1,10 @@
 ﻿using ProjetoIA.Apresentacao.Models;
 using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
-using ProjetoIA.Dominio.Ponto.Enumeradores;
+using ProjetoIA.Dominio.Processamento.Entidades;
+using ProjetoIA.Dominio.Processamento.Servicos;
 
 using System.Windows;
 
@@ -13,8 +15,6 @@ namespace ProjetoIA.Apresentacao
     /// </summary>
     public partial class MainWindow : Window
     {
-        IPonto ponto;
-
         public MainWindow(InformacoesDaTela informacoesDaTela)
         {
             InitializeComponent();
@@ -23,19 +23,26 @@ namespace ProjetoIA.Apresentacao
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ponto = new Ponto("Ponto1", grdLabirinto);
+
         }
 
-        private async void btnProximo_Click(object sender, RoutedEventArgs e)
+        private async void btnIniciar_Click(object sender, RoutedEventArgs e)
         {
-            var servicoDeMovimentacao = IoC.ObterServico<IServicoDeMovimentacaoDoPonto>();
-            var informacoesDaTela = IoC.ObterServico<InformacoesDaTela>();
+            IoC.ObterServico<AlgoritimoGenetico>().DefinirAlgoritimo(
+                new AlgoritimoGenetico()
+                {
+                    Inicio = EnumeradorDeLocalizacaoDoIndividuo.Local0x3,
+                    Solucao = EnumeradorDeLocalizacaoDoIndividuo.Local3x0,
+                    TaxaDeCrossover = 0.6m,
+                    TaxaDeMutacao = 0.3m,
+                    NumeroDeGenes = 6,
+                    MaximoDeGeracoes = 600,
+                    Elitismo = true,
+                    TamanhoDaPopulacao = 100
+                }
+            );
 
-            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul));
-            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Leste));
-            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Sul));
-            await informacoesDaTela.IncrementarPenalidade(await servicoDeMovimentacao.Mover(ponto, EnumeradorDeMovimentoDoPonto.Oeste));
-            informacoesDaTela.IncrementarGeracao();
+            await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar();
         }
     }
 }
