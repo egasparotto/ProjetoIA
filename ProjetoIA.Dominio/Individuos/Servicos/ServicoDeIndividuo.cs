@@ -1,6 +1,7 @@
 ﻿using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
+using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
 using System;
@@ -36,13 +37,17 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
         {
             int aptidao = 0;
 
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(0);
+
             await IoC.ObterServico<IPonto>().DefinirLocalizacao(individuo);
 
             foreach (var movivento in individuo.Genes)
             {
                 aptidao += await IoC.ObterServico<IServicoDeMovimentacaoDoIndividuo>().Mover(individuo, movivento);
+                await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(aptidao);
             }
             individuo.Aptidao = aptidao + distanciaDaChegada[individuo.Localizacao];
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(individuo.Aptidao);
         }
     }
 }

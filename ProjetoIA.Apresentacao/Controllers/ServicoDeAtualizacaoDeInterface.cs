@@ -56,9 +56,9 @@ namespace ProjetoIA.Apresentacao.Controllers
             await AtualizaTela();
         }
 
-        public async Task IncrementarPenalidade(int penalidade)
+        public async Task DefinirAptidao(int aptidao)
         {
-            IoC.ObterServico<InformacoesDaTela>().Penalidade += penalidade;
+            IoC.ObterServico<InformacoesDaTela>().Aptidao = aptidao;
             await AtualizaTela();
         }
 
