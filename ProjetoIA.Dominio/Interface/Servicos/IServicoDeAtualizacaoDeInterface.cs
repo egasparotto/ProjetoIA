@@ -8,5 +8,7 @@ namespace ProjetoIA.Dominio.Interface.Servicos
     {
         Task AtualizarLocalizacao(IPonto ponto);
         Task AtualizaTela(bool aguardar = false);
+        Task IncrementarGeracao();
+        Task IncrementarPenalidade(int penalidade);
     }
 }

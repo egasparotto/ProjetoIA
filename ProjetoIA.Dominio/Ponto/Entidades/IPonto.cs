@@ -1,10 +1,10 @@
-﻿using ProjetoIA.Dominio.Ponto.Enumeradores;
+﻿using ProjetoIA.Dominio.Individuos.Enumeradores;
 
 namespace ProjetoIA.Dominio.Ponto.Entidades
 {
     public interface IPonto
     {
-        EnumeradorDeLocalizacaoDoPonto ObterLocalizacao();
-        void DefinirLocalizacao(EnumeradorDeLocalizacaoDoPonto localizacaoDoPonto);
+        EnumeradorDeLocalizacaoDoIndividuo ObterLocalizacao();
+        void DefinirLocalizacao(EnumeradorDeLocalizacaoDoIndividuo localizacaoDoPonto);
     }
 }

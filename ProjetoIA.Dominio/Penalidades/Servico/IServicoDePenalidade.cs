@@ -1,10 +1,11 @@
-﻿using ProjetoIA.Dominio.Penalidade.Enumeradores;
-using ProjetoIA.Dominio.Ponto.Enumeradores;
+﻿using ProjetoIA.Dominio.Individuos.Enumeradores;
+using ProjetoIA.Dominio.Movimentacao.Enumeradores;
+using ProjetoIA.Dominio.Penalidade.Enumeradores;
 
 namespace ProjetoIA.Dominio.Penalidades.Servico
 {
     public interface IServicoDePenalidade
     {
-        EnumeradorDeResultadoDaMovimentacao CalcularPenalidade(EnumeradorDeMovimentoDoPonto movimentoDoPonto, EnumeradorDeLocalizacaoDoPonto localizacaoAtual);
+        EnumeradorDeResultadoDaMovimentacao CalcularPenalidade(EnumeradorDeMovimentoDoIndividuo movimentoDoPonto, EnumeradorDeLocalizacaoDoIndividuo localizacaoAtual);
     }
 }

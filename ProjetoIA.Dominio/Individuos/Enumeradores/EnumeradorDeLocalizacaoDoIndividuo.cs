@@ -1,6 +1,6 @@
-﻿namespace ProjetoIA.Dominio.Ponto.Enumeradores
+﻿namespace ProjetoIA.Dominio.Individuos.Enumeradores
 {
-    public enum EnumeradorDeLocalizacaoDoPonto
+    public enum EnumeradorDeLocalizacaoDoIndividuo
     {
         Local0x0 = 0,
         Local0x1 = 1,
