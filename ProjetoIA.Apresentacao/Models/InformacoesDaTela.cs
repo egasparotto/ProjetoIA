@@ -10,7 +10,7 @@ namespace ProjetoIA.Apresentacao.Models
 {
     public class InformacoesDaTela : INotifyPropertyChanged
     {
-        private int numeroDeGeracoes = 1;
+        private int numeroDeGeracoes;
 
         public Int32 NumeroDeGeracoes
         {
@@ -25,17 +25,17 @@ namespace ProjetoIA.Apresentacao.Models
             }
         }
 
-        private int penalidade;
+        private int aptidao;
 
-        public Int32 Penalidade
+        public Int32 Aptidao
         {
             get
             {
-                return penalidade;
+                return aptidao;
             }
             set
             {
-                penalidade = value;
+                aptidao = value;
                 NotifyPropertyChanged();
             }
         }

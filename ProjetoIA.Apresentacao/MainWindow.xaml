@@ -33,8 +33,8 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0">Numero de Gerações: </Label>
                 <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"></Label>
-                <Label Grid.Row="1" Grid.Column="0">Penalidade:</Label>
-                <Label Content="{Binding Path=Penalidade, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Grid.Row="1" Grid.Column="0">Aptidão:</Label>
+                <Label Content="{Binding Path=Aptidão, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></Label>
             </Grid>
             <Button x:Name="btnIniciar" Click="btnIniciar_Click" Grid.Column="0" Grid.Row="1">
                 Iniciar

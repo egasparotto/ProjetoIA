@@ -47,6 +47,7 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
             }
 
             await IoC.ObterServico<IPonto>().DefinirLocalizacao(populacao.Individuos.Where(x => x.Aptidao == 0).FirstOrDefault());
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(0);
         }
     }
 }
