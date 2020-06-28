@@ -3,6 +3,7 @@
 using ProjetoIA.Apresentacao.Controllers;
 using ProjetoIA.Apresentacao.Models;
 using ProjetoIA.Dominio.Interfaces;
+using ProjetoIA.Dominio.Servicos;
 
 namespace ProjetoIA.Apresentacao
 {
@@ -11,6 +12,7 @@ namespace ProjetoIA.Apresentacao
         public static IServiceCollection Executar(this IServiceCollection services)
         {
             services.AddTransient<IServicoDeAtualizacaoDeInterface, ServicoDeAtualizacaoDeInterface>();
+            services.AddTransient<IServicoDeMovimentacaoDoPonto, ServicoDeMovimentacaoDoPonto>();
             services.AddSingleton<InformacoesDaTela>();
             return services;
         }
