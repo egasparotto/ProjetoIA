@@ -1,8 +1,12 @@
 ﻿using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
+using ProjetoIA.Dominio.Processamento.Entidades;
+using ProjetoIA.Dominio.Processamento.Servicos;
 
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,14 +22,15 @@ namespace ProjetoIA.Apresentacao.Models
             return local;
         }
 
-        public void DefinirLocalizacao(EnumeradorDeLocalizacaoDoIndividuo value)
+        public async Task DefinirLocalizacao(Individuo individuo)
         {
-            local = value;
+            local = individuo.Localizacao;
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
         }
 
-        public Ponto(string nome, Grid grid)
+        public async Task CriarPonto()
         {
-            Name = nome;
+            Name = "Ponto";
             Content = "P";
             Width = 30;
             Height = 30;
@@ -35,11 +40,8 @@ namespace ProjetoIA.Apresentacao.Models
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
-            DefinirLocalizacao(EnumeradorDeLocalizacaoDoIndividuo.Local0x3);
-
-            IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
-
-            grid.Children.Add(this);
+            local = IoC.ObterServico<AlgoritimoGenetico>().Inicio;
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
         }
     }
 }
