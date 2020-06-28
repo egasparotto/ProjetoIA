@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjetoIA.Dominio.Enumeradores
+﻿namespace ProjetoIA.Dominio.Ponto.Enumeradores
 {
     public enum EnumeradorDeMovimentoDoPonto
     {

@@ -1,7 +1,7 @@
 ﻿using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio.Entidades;
-using ProjetoIA.Dominio.Interfaces;
-using ProjetoIA.Dominio.Servicos;
+using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Ponto.Entidades;
 
 using System;
 using System.Threading;

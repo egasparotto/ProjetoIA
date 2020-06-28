@@ -1,17 +1,18 @@
-﻿using ProjetoIA.Dominio.Entidades;
-using ProjetoIA.Dominio.Enumeradores;
-using ProjetoIA.Dominio.Interfaces;
+﻿using ProjetoIA.Dominio.Base;
+using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Ponto.Entidades;
+using ProjetoIA.Dominio.Ponto.Enumeradores;
 
 using System.Threading.Tasks;
 
-namespace ProjetoIA.Dominio.Servicos
+namespace ProjetoIA.Dominio.Movimentacao.Servicos
 {
     public class ServicoDeMovimentacaoDoPonto : IServicoDeMovimentacaoDoPonto
     {
         public async Task<int> Mover(IPonto ponto, EnumeradorDeMovimentoDoPonto movimento)
         {
             int novoLocal;
-            if(movimento == EnumeradorDeMovimentoDoPonto.Norte)
+            if (movimento == EnumeradorDeMovimentoDoPonto.Norte)
             {
                 novoLocal = (int)ponto.ObterLocalizacao() - 1;
             }

@@ -1,8 +1,8 @@
-﻿using ProjetoIA.Dominio.Entidades;
+﻿using ProjetoIA.Dominio.Ponto.Entidades;
 
 using System.Threading.Tasks;
 
-namespace ProjetoIA.Dominio.Interfaces
+namespace ProjetoIA.Dominio.Interface.Servicos
 {
     public interface IServicoDeAtualizacaoDeInterface
     {

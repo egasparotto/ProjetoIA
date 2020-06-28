@@ -2,8 +2,8 @@
 
 using ProjetoIA.Apresentacao.Controllers;
 using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio.Interfaces;
-using ProjetoIA.Dominio.Servicos;
+using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Movimentacao.Servicos;
 
 namespace ProjetoIA.Apresentacao
 {

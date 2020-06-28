@@ -1,10 +1,6 @@
-﻿using ProjetoIA.Dominio.Enumeradores;
-using ProjetoIA.Dominio.Interfaces;
-using ProjetoIA.Dominio.Servicos;
+﻿using ProjetoIA.Dominio.Ponto.Enumeradores;
 
-using System.Threading.Tasks;
-
-namespace ProjetoIA.Dominio.Entidades
+namespace ProjetoIA.Dominio.Ponto.Entidades
 {
     public interface IPonto
     {
