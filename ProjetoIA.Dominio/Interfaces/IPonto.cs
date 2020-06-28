@@ -10,26 +10,5 @@ namespace ProjetoIA.Dominio.Entidades
     {
         EnumeradorDeLocalizacaoDoPonto ObterLocalizacao();
         void DefinirLocalizacao(EnumeradorDeLocalizacaoDoPonto localizacaoDoPonto);
-
-        public async Task Norte()
-        {
-            DefinirLocalizacao((EnumeradorDeLocalizacaoDoPonto)((int)ObterLocalizacao() - 1));
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
-        }
-        public async Task Sul()
-        {
-            DefinirLocalizacao((EnumeradorDeLocalizacaoDoPonto)((int)ObterLocalizacao() + 1));
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
-        }
-        public async Task Leste()
-        {
-            DefinirLocalizacao((EnumeradorDeLocalizacaoDoPonto)((int)ObterLocalizacao() + 4));
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
-        }
-        public async Task Oeste()
-        {
-            DefinirLocalizacao((EnumeradorDeLocalizacaoDoPonto)((int)ObterLocalizacao() - 4));
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
-        }
     }
 }
