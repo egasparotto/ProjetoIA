@@ -1,5 +1,6 @@
 ﻿using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Interface.Servicos;
+using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Populacoes.Entidades;
 using ProjetoIA.Dominio.Populacoes.Servicos;
 using ProjetoIA.Dominio.Processamento.Entidades;
@@ -37,8 +38,15 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
                 populacao = await servicoDePopulacao.NovaGeracao(populacao);
 
-                temSolucao = populacao.Individuos.Any(x => x.Aptidao == 0);
+                var melhorAptidao = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault().Aptidao;
+
+                if(melhorAptidao == 0)
+                {
+                    temSolucao = true;
+                }
             }
+
+            await IoC.ObterServico<IPonto>().DefinirLocalizacao(populacao.Individuos.Where(x => x.Aptidao == 0).FirstOrDefault());
         }
     }
 }

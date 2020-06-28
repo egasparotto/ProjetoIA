@@ -2,7 +2,7 @@
 using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
-
+using ProjetoIA.Dominio.Ponto.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +35,10 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
         public async Task CalcularAptidao(Individuo individuo)
         {
             int aptidao = 0;
-            foreach(var movivento in individuo.Genes)
+
+            await IoC.ObterServico<IPonto>().DefinirLocalizacao(individuo);
+
+            foreach (var movivento in individuo.Genes)
             {
                 aptidao += await IoC.ObterServico<IServicoDeMovimentacaoDoIndividuo>().Mover(individuo, movivento);
             }

@@ -44,7 +44,7 @@ namespace ProjetoIA.Apresentacao.Controllers
                 IoC.ObterServico<MainWindow>().UpdateLayout();
                 if (aguardar)
                 {
-                    Thread.Sleep(500);
+                    //Thread.Sleep(50);
                 }
             };
             await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);

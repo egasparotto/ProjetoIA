@@ -25,6 +25,11 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
             {
                 return 200;
             }
+            if (penalidade == EnumeradorDeResultadoDaMovimentacao.AtravessaParede)
+            {
+                return 100;
+            }
+
             int novoLocal;
             if (movimento == EnumeradorDeMovimentoDoIndividuo.Norte)
             {
@@ -44,12 +49,7 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
             }
 
             individuo.Localizacao = (EnumeradorDeLocalizacaoDoIndividuo)novoLocal;
-            //await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(ponto);
-
-            if (penalidade == EnumeradorDeResultadoDaMovimentacao.AtravessaParede)
-            {
-                return 100 + 0;
-            }
+            await IoC.ObterServico<IPonto>().DefinirLocalizacao(individuo);
 
             return 0;
         }

@@ -38,9 +38,13 @@ namespace ProjetoIA.Apresentacao
                     NumeroDeGenes = 6,
                     MaximoDeGeracoes = 600,
                     Elitismo = true,
-                    TamanhoDaPopulacao = 100
+                    TamanhoDaPopulacao = 20
                 }
             );
+
+            var ponto = IoC.ObterServico<IPonto>();
+            await ponto.CriarPonto();
+            grdLabirinto.Children.Add((Ponto)ponto);
 
             await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar();
         }
