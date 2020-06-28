@@ -36,7 +36,7 @@ namespace ProjetoIA.Apresentacao.Controllers
             await AtualizaTela(true);
         }
 
-        private async Task AtualizaTela(bool aguardar = false)
+        public async Task AtualizaTela(bool aguardar = false)
         {
 
             Action funcao = delegate ()
