@@ -1,11 +1,8 @@
 ﻿using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio;
+using ProjetoIA.Dominio.Entidades;
+using ProjetoIA.Dominio.Servicos;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace ProjetoIA.Apresentacao
 {
@@ -14,16 +11,12 @@ namespace ProjetoIA.Apresentacao
     /// </summary>
     public partial class MainWindow : Window
     {
-        Ponto ponto;
+        IPonto ponto;
 
-        InformacoesDaTela InformacoesDaTela { get; }
-
-
-        public MainWindow()
+        public MainWindow(InformacoesDaTela informacoesDaTela)
         {
             InitializeComponent();
-            InformacoesDaTela = new InformacoesDaTela();
-            DataContext = InformacoesDaTela;
+            DataContext = informacoesDaTela;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -33,33 +26,11 @@ namespace ProjetoIA.Apresentacao
 
         private async void btnProximo_Click(object sender, RoutedEventArgs e)
         {
-
-            ponto.Norte();
-            await AtualizaTela(true);
-
-            ponto.Norte();
-            await AtualizaTela(true);
-
-            ponto.Leste();
-            await AtualizaTela(true);
-
-            ponto.Leste();
-            await AtualizaTela();
-            InformacoesDaTela.IncrementarGeracao();
-        }
-
-
-        private async Task AtualizaTela(bool aguardar = false)
-        {
-
-            Action funcao = delegate () { 
-                UpdateLayout();
-                if (aguardar)
-                {
-                    Thread.Sleep(500);
-                }
-            };
-            await Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);
+            await ponto.Norte();
+            await ponto.Norte();
+            await ponto.Leste();
+            await ponto.Leste();
+            IoC.ObterServico<InformacoesDaTela>().IncrementarGeracao();
         }
     }
 }
