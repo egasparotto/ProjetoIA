@@ -40,9 +40,23 @@ namespace ProjetoIA.Apresentacao.Models
             }
         }
 
+        public int MaximoDeGeracoes { get; set; }
+        public int TamanhoDaPopulacao { get; set; }
+        public bool AtrasoNaAtualizacao { get; set; }
+        public bool Elitismo { get; set; }
+        public decimal TaxaDeMutacao { get; set; }
+        public decimal TaxaDeCrossover { get; set; }
+
         public InformacoesDaTela()
         {
+            Aptidao = 60;
             NumeroDeGeracoes = 0;
+            MaximoDeGeracoes = 600;
+            TamanhoDaPopulacao = 20;
+            AtrasoNaAtualizacao = false;
+            Elitismo = true;
+            TaxaDeMutacao = 0.3m;
+            TaxaDeCrossover = 0.6m;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
