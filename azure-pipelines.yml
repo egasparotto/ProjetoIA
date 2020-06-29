@@ -35,4 +35,4 @@ steps:
     isPreRelease: false
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
-    assets: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\win-x64\publish\ProjetoIA.exe'
+    assets: 'D:\a\1\s\ProjetoIA.Apresentacao\bin\release\netcoreapp3.1\win-x64\publish\ProjetoIA.exe'
