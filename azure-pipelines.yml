@@ -30,6 +30,14 @@ steps:
     ArtifactName: 'ProjetoIA'
     publishLocation: 'Container'
     
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
+    replaceExistingArchive: true
+
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'Github EGasparotto'
@@ -41,4 +49,4 @@ steps:
     isPreRelease: false
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
-    assets: '$(Build.ArtifactStagingDirectory)\ProjetoIA.exe'
+    assets: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
