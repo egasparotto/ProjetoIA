@@ -32,22 +32,32 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             await servicoDePopulacao.CalculaAptidaoDaPopulacao(populacao);
 
+            var melhorAptidao = 60;
+
             for (int i = 1; !temSolucao && i <= algoritimo.MaximoDeGeracoes; i++)
             {
                 await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().IncrementarGeracao();
 
                 populacao = await servicoDePopulacao.NovaGeracao(populacao);
 
-                var melhorAptidao = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault().Aptidao;
+                var aptidao = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault().Aptidao;
 
-                if(melhorAptidao == 0)
+                if(aptidao == 0)
                 {
                     temSolucao = true;
                 }
+                if(melhorAptidao > aptidao)
+                {
+                    melhorAptidao = aptidao;
+                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorAptidao);
+                }
             }
 
-            await IoC.ObterServico<IPonto>().DefinirLocalizacao(populacao.Individuos.Where(x => x.Aptidao == 0).FirstOrDefault());
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(0);
+            var melhorIndividuo = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault();
+
+            await IoC.ObterServico<IPonto>().DefinirLocalizacao(melhorIndividuo);
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorIndividuo.Aptidao);
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().FinalizaExecucao();
         }
     }
 }

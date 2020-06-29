@@ -6,6 +6,7 @@ using ProjetoIA.Dominio.Ponto.Entidades;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -44,10 +45,23 @@ namespace ProjetoIA.Apresentacao.Controllers
                 IoC.ObterServico<MainWindow>().UpdateLayout();
                 if (aguardar)
                 {
-                    //Thread.Sleep(50);
+                    if (IoC.ObterServico<InformacoesDaTela>().AtrasoNaAtualizacao)
+                    {
+                        Thread.Sleep(100);
+                    }
                 }
             };
             await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);
+        }
+
+        public async Task FinalizaExecucao()
+        {
+            Action funcao = delegate ()
+            {
+                IoC.ObterServico<MainWindow>().UpdateLayout();
+                MessageBox.Show("Finalizado");
+            };
+            await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Send, funcao);
         }
 
         public async Task IncrementarGeracao()

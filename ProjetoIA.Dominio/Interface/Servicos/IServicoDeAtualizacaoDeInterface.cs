@@ -10,5 +10,6 @@ namespace ProjetoIA.Dominio.Interface.Servicos
         Task AtualizaTela(bool aguardar = false);
         Task IncrementarGeracao();
         Task DefinirAptidao(int aptidao);
+        Task FinalizaExecucao();
     }
 }
