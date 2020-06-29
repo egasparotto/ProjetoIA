@@ -15,27 +15,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  name: 'Build'
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
+    command: 'build'
+  
+- task: DotNetCoreCLI@2
+  name: 'Publish'
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/ProjetoIA.Apresentacao.csproj'
+    arguments: '-p:PublishSingleFile=true'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Release\netcoreapp3.1\'
+    rootFolderOrFile: 'd:\a\1\s\ProjetoIA.Apresentacao\bin\Debug\netcoreapp3.1\publish\'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
