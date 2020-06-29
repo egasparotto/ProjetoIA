@@ -22,11 +22,11 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/ProjetoIA.Apresentacao.csproj'
-    arguments: '-p:PublishSingleFile=true -r win-x64 -c release'
+    arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'D:\a\1\s\ProjetoIA.Apresentacao\bin\release\netcoreapp3.1\win-x64\publish\'
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
     ArtifactName: 'ProjetoIA'
     publishLocation: 'Container'
     
@@ -41,4 +41,4 @@ steps:
     isPreRelease: false
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
-    assets: 'D:\a\1\s\ProjetoIA.Apresentacao\bin\release\netcoreapp3.1\win-x64\publish\ProjetoIA.exe'
+    assets: '$(Build.ArtifactStagingDirectory)\ProjetoIA.exe'
