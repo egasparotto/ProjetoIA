@@ -24,16 +24,10 @@ steps:
     projects: '**/ProjetoIA.Apresentacao.csproj'
     arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: 'ProjetoIA'
-    publishLocation: 'Container'
-    
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
     replaceExistingArchive: true
