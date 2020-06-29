@@ -24,6 +24,12 @@ steps:
     projects: '**/ProjetoIA.Apresentacao.csproj'
     arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)\*.zip'
+    destinationFolder: '$(Build.ArtifactStagingDirectory)'
+    cleanDestinationFolder: true
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
