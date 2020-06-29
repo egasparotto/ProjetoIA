@@ -52,7 +52,7 @@ namespace ProjetoIA.Apresentacao.Models
             Aptidao = 60;
             NumeroDeGeracoes = 0;
             MaximoDeGeracoes = 600;
-            TamanhoDaPopulacao = 20;
+            TamanhoDaPopulacao = 200;
             AtrasoNaAtualizacao = false;
             Elitismo = true;
             TaxaDeMutacao = 0.3m;
