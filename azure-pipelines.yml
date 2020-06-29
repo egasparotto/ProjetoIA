@@ -24,6 +24,12 @@ steps:
     projects: '**/ProjetoIA.Apresentacao.csproj'
     arguments: '-p:PublishSingleFile=true -r win-x64 -c release'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'D:\a\1\s\ProjetoIA.Apresentacao\bin\release\netcoreapp3.1\win-x64\publish\'
+    ArtifactName: 'ProjetoIA'
+    publishLocation: 'Container'
+    
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'Github EGasparotto'
