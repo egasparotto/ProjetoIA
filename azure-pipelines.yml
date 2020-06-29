@@ -26,13 +26,13 @@ steps:
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)\*.zip'
-    destinationFolder: '$(Build.ArtifactStagingDirectory)'
+    archiveFilePatterns: '**/*.zip'
+    destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
     cleanDestinationFolder: true
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/Saida'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
