@@ -25,9 +25,9 @@ namespace ProjetoIA.Apresentacao.Models
             }
         }
 
-        private int aptidao;
+        private int? aptidao;
 
-        public Int32 Aptidao
+        public Int32? Aptidao
         {
             get
             {
@@ -64,7 +64,7 @@ namespace ProjetoIA.Apresentacao.Models
 
         public InformacoesDaTela()
         {
-            Aptidao = 60;
+            Aptidao = null;
             NumeroDeGeracoes = 0;
             MaximoDeGeracoes = 600;
             TamanhoDaPopulacao = 200;

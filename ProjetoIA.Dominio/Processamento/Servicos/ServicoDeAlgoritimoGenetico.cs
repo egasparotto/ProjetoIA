@@ -33,7 +33,7 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             await servicoDePopulacao.CalculaAptidaoDaPopulacao(populacao);
 
-            var melhorAptidao = 60;
+            int? melhorAptidao = null;
 
             for (int i = 1; !temSolucao && i <= algoritimo.MaximoDeGeracoes && !token.IsCancellationRequested ; i++)
             {
@@ -43,14 +43,14 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
                 var melhorIndividuoLocal = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault();
 
-                if(melhorIndividuoLocal.Aptidao == 0)
+                if(melhorIndividuoLocal.Localizacao == algoritimo.Solucao)
                 {
                     temSolucao = true;
                 }
-                if(melhorAptidao > melhorIndividuoLocal.Aptidao)
+                if(melhorAptidao > melhorIndividuoLocal.Aptidao || melhorAptidao == null)
                 {
                     melhorAptidao = melhorIndividuoLocal.Aptidao;
-                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorAptidao);
+                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorAptidao.Value);
                     await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefineMelhorCaminho(melhorIndividuoLocal.Genes);
                 }
             }
