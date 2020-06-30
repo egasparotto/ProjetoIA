@@ -40,6 +40,21 @@ namespace ProjetoIA.Apresentacao.Models
             }
         }
 
+        private string melhorCaminho;
+
+        public string MelhorCaminho
+        {
+            get
+            {
+                return melhorCaminho;
+            }
+            set
+            {
+                melhorCaminho = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int MaximoDeGeracoes { get; set; }
         public int TamanhoDaPopulacao { get; set; }
         public bool AtrasoNaAtualizacao { get; set; }

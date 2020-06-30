@@ -6,6 +6,8 @@ using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Processamento.Entidades;
 using ProjetoIA.Dominio.Processamento.Servicos;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,10 +19,13 @@ namespace ProjetoIA.Apresentacao
     /// </summary>
     public partial class MainWindow : Window
     {
+        CancellationTokenSource tokenSource;
+
         public MainWindow(InformacoesDaTela informacoesDaTela)
         {
             InitializeComponent();
             DataContext = informacoesDaTela;
+            tokenSource = new CancellationTokenSource();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -30,6 +35,9 @@ namespace ProjetoIA.Apresentacao
 
         private async void btnIniciar_Click(object sender, RoutedEventArgs e)
         {
+            btnCancelar.IsEnabled = true;
+            btnIniciar.IsEnabled = false;
+
             var infoTela = IoC.ObterServico<InformacoesDaTela>();
             infoTela.Aptidao = 60;
             infoTela.NumeroDeGeracoes = 0;
@@ -53,7 +61,20 @@ namespace ProjetoIA.Apresentacao
             grdLabirinto.Children.Remove((Ponto)ponto);
             grdLabirinto.Children.Add((Ponto)ponto);
 
-            await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar();
+            await Task.Run(async () =>
+            {
+                await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar(tokenSource.Token);
+            }, tokenSource.Token);
+
+            tokenSource = new CancellationTokenSource();
+
+            btnCancelar.IsEnabled = false;
+            btnIniciar.IsEnabled = true;
+        }
+
+        private async void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            tokenSource.Cancel();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Processamento.Servicos
@@ -22,7 +23,7 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
             this.algoritimo = algoritimo;
         }
 
-        public async Task Processar()
+        public async Task Processar(CancellationToken token)
         {
             var servicoDePopulacao = IoC.ObterServico<IServicoDePopulacao>();
 
@@ -34,22 +35,23 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             var melhorAptidao = 60;
 
-            for (int i = 1; !temSolucao && i <= algoritimo.MaximoDeGeracoes; i++)
+            for (int i = 1; !temSolucao && i <= algoritimo.MaximoDeGeracoes && !token.IsCancellationRequested ; i++)
             {
                 await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().IncrementarGeracao();
 
                 populacao = await servicoDePopulacao.NovaGeracao(populacao);
 
-                var aptidao = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault().Aptidao;
+                var melhorIndividuoLocal = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault();
 
-                if(aptidao == 0)
+                if(melhorIndividuoLocal.Aptidao == 0)
                 {
                     temSolucao = true;
                 }
-                if(melhorAptidao > aptidao)
+                if(melhorAptidao > melhorIndividuoLocal.Aptidao)
                 {
-                    melhorAptidao = aptidao;
+                    melhorAptidao = melhorIndividuoLocal.Aptidao;
                     await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorAptidao);
+                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefineMelhorCaminho(melhorIndividuoLocal.Genes);
                 }
             }
 
@@ -57,7 +59,11 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             await IoC.ObterServico<IPonto>().DefinirLocalizacao(melhorIndividuo);
             await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorIndividuo.Aptidao);
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().FinalizaExecucao();
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefineMelhorCaminho(melhorIndividuo.Genes);
+            if (!token.IsCancellationRequested)
+            {
+                await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().FinalizaExecucao();
+            }
         }
     }
 }

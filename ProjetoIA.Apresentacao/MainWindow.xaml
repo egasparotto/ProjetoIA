@@ -25,9 +25,10 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="8*" />
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -39,24 +40,38 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0">Numero de Gerações: </Label>
                 <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"></Label>
-                <Label Grid.Row="1" Grid.Column="0">Aptidão:</Label>
+                <Label Grid.Row="1" Grid.Column="0">Melhor Aptidão:</Label>
                 <Label Content="{Binding Path=Aptidao, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></Label>
-                <Label Grid.Row="2" Grid.Column="0">Máximo de Geracoes:</Label>
-                <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding MaximoDeGeracoes}"/>
-                <Label Grid.Row="3" Grid.Column="0">Tamanho da População:</Label>
-                <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding TamanhoDaPopulacao}"/>
-                <Label Grid.Row="4" Grid.Column="0">Atraso na Atualizacao da Tela:</Label>
-                <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding AtrasoNaAtualizacao}"></CheckBox>
-                <Label Grid.Row="5" Grid.Column="0">Elitismo:</Label>
-                <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Elitismo}"></CheckBox>
-                <Label Grid.Row="6" Grid.Column="0">Taxa de Mutação:</Label>
-                <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding TaxaDeMutacao}"/>
-                <Label Grid.Row="7" Grid.Column="0">Taxa de Crossover:</Label>
-                <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="7" Grid.Column="1" Text="{Binding TaxaDeCrossover}"/>
+                <Label Grid.Row="2" Grid.Column="0">Melhor Trajeto:</Label>
+                <Label Content="{Binding Path=MelhorCaminho, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"></Label>
+                <Label Grid.Row="3" Grid.Column="0">Máximo de Geracoes:</Label>
+                <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding MaximoDeGeracoes}"/>
+                <Label Grid.Row="4" Grid.Column="0">Tamanho da População:</Label>
+                <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="1" Text="{Binding TamanhoDaPopulacao}"/>
+                <Label Grid.Row="5" Grid.Column="0">Atraso na Atualizacao da Tela:</Label>
+                <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding AtrasoNaAtualizacao}"></CheckBox>
+                <Label Grid.Row="6" Grid.Column="0">Elitismo:</Label>
+                <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Elitismo}"></CheckBox>
+                <Label Grid.Row="7" Grid.Column="0">Taxa de Mutação:</Label>
+                <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="7" Grid.Column="1" Text="{Binding TaxaDeMutacao}"/>
+                <Label Grid.Row="8" Grid.Column="0">Taxa de Crossover:</Label>
+                <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="8" Grid.Column="1" Text="{Binding TaxaDeCrossover}"/>
             </Grid>
-            <Button x:Name="btnIniciar" Click="btnIniciar_Click" Grid.Column="0" Grid.Row="1">
-                Iniciar
-            </Button>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button x:Name="btnIniciar" Click="btnIniciar_Click" Grid.Column="0" Grid.Row="0">
+                    Iniciar
+                </Button>
+                <Button x:Name="btnCancelar" Click="btnCancelar_Click" Grid.Column="1" Grid.Row="0" IsEnabled="False">
+                    Cancelar
+                </Button>
+            </Grid>
         </Grid>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0">
             <Grid x:Name="grdLabirinto" Background="White">

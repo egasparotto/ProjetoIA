@@ -31,15 +31,15 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
             }
 
             int novoLocal;
-            if (movimento == EnumeradorDeMovimentoDoIndividuo.Norte)
+            if (movimento == EnumeradorDeMovimentoDoIndividuo.N)
             {
                 novoLocal = (int)individuo.Localizacao - 1;
             }
-            else if (movimento == EnumeradorDeMovimentoDoIndividuo.Sul)
+            else if (movimento == EnumeradorDeMovimentoDoIndividuo.S)
             {
                 novoLocal = (int)individuo.Localizacao + 1;
             }
-            else if (movimento == EnumeradorDeMovimentoDoIndividuo.Leste)
+            else if (movimento == EnumeradorDeMovimentoDoIndividuo.L)
             {
                 novoLocal = (int)individuo.Localizacao + 4;
             }

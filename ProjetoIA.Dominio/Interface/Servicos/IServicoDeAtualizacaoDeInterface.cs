@@ -1,5 +1,6 @@
-﻿using ProjetoIA.Dominio.Ponto.Entidades;
-
+﻿using ProjetoIA.Dominio.Movimentacao.Enumeradores;
+using ProjetoIA.Dominio.Ponto.Entidades;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Interface.Servicos
@@ -11,5 +12,6 @@ namespace ProjetoIA.Dominio.Interface.Servicos
         Task IncrementarGeracao();
         Task DefinirAptidao(int aptidao);
         Task FinalizaExecucao();
+        Task DefineMelhorCaminho(IList<EnumeradorDeMovimentoDoIndividuo> genes);
     }
 }

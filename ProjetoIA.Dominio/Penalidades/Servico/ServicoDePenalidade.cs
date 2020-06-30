@@ -13,7 +13,7 @@ namespace ProjetoIA.Dominio.Penalidades.Servico
         protected readonly IDictionary<EnumeradorDeMovimentoDoIndividuo, IDictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>> movimentosInvalidos = new Dictionary<EnumeradorDeMovimentoDoIndividuo, IDictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>>()
         {
             {
-                EnumeradorDeMovimentoDoIndividuo.Norte, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.N, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
                     { EnumeradorDeLocalizacaoDoIndividuo.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
                     { EnumeradorDeLocalizacaoDoIndividuo.Local1x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
@@ -24,7 +24,7 @@ namespace ProjetoIA.Dominio.Penalidades.Servico
                 }
             },
             {
-                EnumeradorDeMovimentoDoIndividuo.Sul, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.S, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
                     { EnumeradorDeLocalizacaoDoIndividuo.Local0x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
                     { EnumeradorDeLocalizacaoDoIndividuo.Local1x3, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
@@ -34,7 +34,7 @@ namespace ProjetoIA.Dominio.Penalidades.Servico
                 }
             },
             {
-                EnumeradorDeMovimentoDoIndividuo.Leste, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.L, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
                     { EnumeradorDeLocalizacaoDoIndividuo.Local3x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
                     { EnumeradorDeLocalizacaoDoIndividuo.Local3x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
@@ -45,7 +45,7 @@ namespace ProjetoIA.Dominio.Penalidades.Servico
                 }
             },
             {
-                EnumeradorDeMovimentoDoIndividuo.Oeste, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
+                EnumeradorDeMovimentoDoIndividuo.O, new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, EnumeradorDeResultadoDaMovimentacao>()
                 {
                     { EnumeradorDeLocalizacaoDoIndividuo.Local0x0, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
                     { EnumeradorDeLocalizacaoDoIndividuo.Local0x1, EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto },
