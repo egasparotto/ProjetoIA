@@ -32,12 +32,6 @@ steps:
     projects: '**/ProjetoIA.Console.csproj'
     arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained true'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/ProjetoIA.Apresentacao.zip'
@@ -48,6 +42,13 @@ steps:
   inputs:
     archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/ProjetoIA.Console.zip'
     destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
+    cleanDestinationFolder: false
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Saida'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 - task: GitHubRelease@1
   inputs:
