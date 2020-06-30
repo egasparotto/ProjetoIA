@@ -36,7 +36,11 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
         public async Task CalcularAptidao(Individuo individuo)
         {
             int aptidao = -15;
-            await IoC.ObterServico<IPonto>().DefinirLocalizacao(individuo);
+            var ponto = IoC.ObterServico<IPonto>();
+            if(ponto != null)
+            {
+                await ponto.DefinirLocalizacao(individuo);
+            }
             foreach (var movivento in individuo.Genes)
             {
                 aptidao += await IoC.ObterServico<IServicoDeMovimentacaoDoIndividuo>().Mover(individuo, movivento) + distanciaDaChegada[individuo.Localizacao];

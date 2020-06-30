@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoIA.Apresentacao", "ProjetoIA.Apresentacao\ProjetoIA.Apresentacao.csproj", "{86D56F1A-EAE7-457A-ACAD-C3550E1504C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoIA.Apresentacao", "ProjetoIA.Apresentacao\ProjetoIA.Apresentacao.csproj", "{86D56F1A-EAE7-457A-ACAD-C3550E1504C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoIA.Dominio", "ProjetoIA.Dominio\ProjetoIA.Dominio.csproj", "{C1A033AC-4E07-47B4-BC41-75725F9CCBEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoIA.Dominio", "ProjetoIA.Dominio\ProjetoIA.Dominio.csproj", "{C1A033AC-4E07-47B4-BC41-75725F9CCBEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoIA.Console", "ProjetoIA.Console\ProjetoIA.Console.csproj", "{521E7A4B-15EB-4516-8158-A5D4D42DB377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C1A033AC-4E07-47B4-BC41-75725F9CCBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A033AC-4E07-47B4-BC41-75725F9CCBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A033AC-4E07-47B4-BC41-75725F9CCBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521E7A4B-15EB-4516-8158-A5D4D42DB377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521E7A4B-15EB-4516-8158-A5D4D42DB377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521E7A4B-15EB-4516-8158-A5D4D42DB377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521E7A4B-15EB-4516-8158-A5D4D42DB377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

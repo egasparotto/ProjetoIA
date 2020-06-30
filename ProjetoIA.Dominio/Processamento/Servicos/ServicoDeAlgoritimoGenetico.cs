@@ -17,10 +17,12 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
     public class ServicoDeAlgoritimoGenetico : IServicoDeAlgoritimoGenetico
     {
         private readonly AlgoritimoGenetico algoritimo;
+        private IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface;
 
-        public ServicoDeAlgoritimoGenetico(AlgoritimoGenetico algoritimo)
+        public ServicoDeAlgoritimoGenetico(AlgoritimoGenetico algoritimo, IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface)
         {
             this.algoritimo = algoritimo;
+            this.servicoDeAtualizacaoDeInterface = servicoDeAtualizacaoDeInterface;
         }
 
         public async Task Processar(CancellationToken token)
@@ -37,32 +39,40 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             for (int i = 1; !temSolucao && i <= algoritimo.MaximoDeGeracoes && !token.IsCancellationRequested ; i++)
             {
-                await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().IncrementarGeracao();
+                await servicoDeAtualizacaoDeInterface.IncrementarGeracao();
 
                 populacao = await servicoDePopulacao.NovaGeracao(populacao);
 
                 var melhorIndividuoLocal = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault();
 
-                if(melhorIndividuoLocal.Localizacao == algoritimo.Solucao)
+                await servicoDeAtualizacaoDeInterface.DefinirMelhorAptidaoDaGeracao(melhorIndividuoLocal.Aptidao);
+                await servicoDeAtualizacaoDeInterface.DefineMelhorCaminhoDaGeracao(melhorIndividuoLocal.Genes);
+
+                if (melhorIndividuoLocal.Localizacao == algoritimo.Solucao)
                 {
                     temSolucao = true;
                 }
-                if(melhorAptidao > melhorIndividuoLocal.Aptidao || melhorAptidao == null)
+                if(melhorAptidao >= melhorIndividuoLocal.Aptidao || melhorAptidao == null)
                 {
                     melhorAptidao = melhorIndividuoLocal.Aptidao;
-                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorAptidao.Value);
-                    await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefineMelhorCaminho(melhorIndividuoLocal.Genes);
+                    await servicoDeAtualizacaoDeInterface.DefinirMelhorAptidaoGeral(melhorAptidao.Value);
+                    await servicoDeAtualizacaoDeInterface.DefineMelhorCaminhoGeral(melhorIndividuoLocal.Genes);
                 }
             }
 
             var melhorIndividuo = populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault();
 
-            await IoC.ObterServico<IPonto>().DefinirLocalizacao(melhorIndividuo);
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefinirAptidao(melhorIndividuo.Aptidao);
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().DefineMelhorCaminho(melhorIndividuo.Genes);
+            var ponto = IoC.ObterServico<IPonto>();
+            if (ponto != null)
+            {
+                await ponto.DefinirLocalizacao(melhorIndividuo);
+                await servicoDeAtualizacaoDeInterface.DefinirMelhorAptidaoGeral(melhorIndividuo.Aptidao);
+                await servicoDeAtualizacaoDeInterface.DefineMelhorCaminhoGeral(melhorIndividuo.Genes);
+            }
+
             if (!token.IsCancellationRequested)
             {
-                await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().FinalizaExecucao();
+                await servicoDeAtualizacaoDeInterface.FinalizaExecucao();
             }
         }
     }

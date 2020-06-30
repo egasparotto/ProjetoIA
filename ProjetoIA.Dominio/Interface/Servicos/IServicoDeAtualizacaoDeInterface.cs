@@ -7,11 +7,14 @@ namespace ProjetoIA.Dominio.Interface.Servicos
 {
     public interface IServicoDeAtualizacaoDeInterface
     {
+        Task LimparInformacoes();
         Task AtualizarLocalizacao(IPonto ponto);
         Task AtualizaTela(bool aguardar = false);
         Task IncrementarGeracao();
-        Task DefinirAptidao(int aptidao);
+        Task DefinirMelhorAptidaoGeral(int aptidao);
+        Task DefinirMelhorAptidaoDaGeracao(int aptidao);
         Task FinalizaExecucao();
-        Task DefineMelhorCaminho(IList<EnumeradorDeMovimentoDoIndividuo> genes);
+        Task DefineMelhorCaminhoGeral(IList<EnumeradorDeMovimentoDoIndividuo> genes);
+        Task DefineMelhorCaminhoDaGeracao(IList<EnumeradorDeMovimentoDoIndividuo> genes);
     }
 }

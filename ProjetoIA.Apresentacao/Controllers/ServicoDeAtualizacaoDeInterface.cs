@@ -78,17 +78,37 @@ namespace ProjetoIA.Apresentacao.Controllers
             await AtualizaTela();
         }
 
-        public async Task DefinirAptidao(int aptidao)
+        public async Task DefinirMelhorAptidaoGeral(int aptidao)
         {
             IoC.ObterServico<InformacoesDaTela>().Aptidao = aptidao;
             await AtualizaTela();
         }
 
-        public async Task DefineMelhorCaminho(IList<EnumeradorDeMovimentoDoIndividuo> genes)
+        public async Task DefineMelhorCaminhoGeral(IList<EnumeradorDeMovimentoDoIndividuo> genes)
         {
             IoC.ObterServico<InformacoesDaTela>().MelhorCaminho = String.Join("-",genes.Select(x => Enum.GetName(typeof(EnumeradorDeMovimentoDoIndividuo),x)));
             await AtualizaTela();
         }
 
+        public Task DefinirMelhorAptidaoDaGeracao(int aptidao)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task DefineMelhorCaminhoDaGeracao(IList<EnumeradorDeMovimentoDoIndividuo> genes)
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task LimparInformacoes()
+        {
+            var infoTela = IoC.ObterServico<InformacoesDaTela>();
+
+            infoTela.NumeroDeGeracoes = 0;
+            infoTela.Aptidao = null;
+            infoTela.MelhorCaminho = null;
+
+            await AtualizaTela();
+        }
     }
 }

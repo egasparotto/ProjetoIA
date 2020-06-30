@@ -1,6 +1,7 @@
 ﻿using ProjetoIA.Apresentacao.Models;
 using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
+using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Processamento.Entidades;
@@ -39,8 +40,8 @@ namespace ProjetoIA.Apresentacao
             btnIniciar.IsEnabled = false;
 
             var infoTela = IoC.ObterServico<InformacoesDaTela>();
-            infoTela.Aptidao = 60;
-            infoTela.NumeroDeGeracoes = 0;
+
+            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().LimparInformacoes();
 
             IoC.ObterServico<AlgoritimoGenetico>().DefinirAlgoritimo(
                 new AlgoritimoGenetico()

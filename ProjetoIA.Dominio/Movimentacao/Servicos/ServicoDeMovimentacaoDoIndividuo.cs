@@ -49,7 +49,12 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
             }
 
             individuo.Localizacao = (EnumeradorDeLocalizacaoDoIndividuo)novoLocal;
-            await IoC.ObterServico<IPonto>().DefinirLocalizacao(individuo);
+
+            var ponto = IoC.ObterServico<IPonto>();
+            if(ponto != null)
+            {
+                await ponto.DefinirLocalizacao(individuo);
+            }
 
             return 0;
         }
