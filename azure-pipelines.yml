@@ -44,6 +44,11 @@ steps:
     destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
     cleanDestinationFolder: true
 
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/ProjetoIA.Console.zip'
+    destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
+
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'Github EGasparotto'
@@ -57,4 +62,4 @@ steps:
     changeLogType: 'commitBased'
     assets: 
       -'$(Build.ArtifactStagingDirectory)/Saida/ProjetoIA.exe'
-      -'$(Build.ArtifactStagingDirectory)/ProjetoIA.Console.exe'
+      -'$(Build.ArtifactStagingDirectory)/Saida/ProjetoIA.Console.exe'
