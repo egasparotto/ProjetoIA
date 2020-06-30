@@ -22,7 +22,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/ProjetoIA.Apresentacao.csproj'
-    arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: '-p:PublishSingleFile=true -r win-x64 -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained true'
 
 - task: ExtractFiles@1
   inputs:
