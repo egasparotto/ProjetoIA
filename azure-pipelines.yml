@@ -30,14 +30,6 @@ steps:
     destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
     cleanDestinationFolder: true
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/Saida'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
-    replaceExistingArchive: true
-
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'Github EGasparotto'
@@ -49,4 +41,4 @@ steps:
     isPreRelease: false
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
-    assets: '$(Build.ArtifactStagingDirectory)/Executavel.zip'
+    assets: '$(Build.ArtifactStagingDirectory)/Saida/ProjetoIA.exe'
