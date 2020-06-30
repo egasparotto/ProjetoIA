@@ -26,7 +26,7 @@ steps:
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '**/*.zip'
+    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/ProjetoIA.Apresentacao.zip'
     destinationFolder: '$(Build.ArtifactStagingDirectory)/Saida'
     cleanDestinationFolder: true
 
