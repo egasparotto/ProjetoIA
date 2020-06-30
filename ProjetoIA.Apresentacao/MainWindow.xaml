@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetoIA.Apresentacao"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Inteligência Computacional - Eduardo Gasparotto e Rafael Catuzzo" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Normal">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />

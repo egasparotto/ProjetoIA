@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>ProjetoIA</AssemblyName>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
