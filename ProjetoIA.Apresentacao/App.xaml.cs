@@ -22,7 +22,6 @@ namespace ProjetoIA.Apresentacao
         private void ConfigureServices(IServiceCollection services)
         {
             services.Executar();
-            services.AddSingleton(typeof(MainWindow));
         }
     }
 }
