@@ -1,5 +1,4 @@
 ﻿using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Ponto.Entidades;
@@ -18,6 +17,14 @@ namespace ProjetoIA.Apresentacao.Controllers
 {
     class ServicoDeAtualizacaoDeInterface : IServicoDeAtualizacaoDeInterface
     {
+        private MainWindow mainWindow;
+        private readonly InformacoesDaTela _informacoesDaTela;
+
+        public ServicoDeAtualizacaoDeInterface(InformacoesDaTela informacoesDaTela)
+        {
+            _informacoesDaTela = informacoesDaTela;
+        }
+
         public async Task AtualizarLocalizacao(IPonto ponto)
         {
             Application.Current.Dispatcher.Invoke(DispatcherPriority.Render,
@@ -50,43 +57,48 @@ namespace ProjetoIA.Apresentacao.Controllers
 
             Action funcao = delegate ()
             {
-                IoC.ObterServico<MainWindow>().UpdateLayout();
+                mainWindow.UpdateLayout();
                 if (aguardar)
                 {
-                    if (IoC.ObterServico<InformacoesDaTela>().AtrasoNaAtualizacao)
+                    if (_informacoesDaTela.AtrasoNaAtualizacao)
                     {
                         Thread.Sleep(100);
                     }
                 }
             };
-            await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);
+            await mainWindow.Dispatcher.BeginInvoke(DispatcherPriority.Render, funcao);
+        }
+
+        public void DefineMainWindow(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
         }
 
         public async Task FinalizaExecucao()
         {
             Action funcao = delegate ()
             {
-                IoC.ObterServico<MainWindow>().UpdateLayout();
+                mainWindow.UpdateLayout();
                 MessageBox.Show("Finalizado");
             };
-            await IoC.ObterServico<MainWindow>().Dispatcher.BeginInvoke(DispatcherPriority.Send, funcao);
+            await mainWindow.Dispatcher.BeginInvoke(DispatcherPriority.Send, funcao);
         }
 
         public async Task IncrementarGeracao()
         {
-            IoC.ObterServico<InformacoesDaTela>().NumeroDeGeracoes++;
+            _informacoesDaTela.NumeroDeGeracoes++;
             await AtualizaTela();
         }
 
         public async Task DefinirMelhorAptidaoGeral(int aptidao)
         {
-            IoC.ObterServico<InformacoesDaTela>().Aptidao = aptidao;
+            _informacoesDaTela.Aptidao = aptidao;
             await AtualizaTela();
         }
 
         public async Task DefineMelhorCaminhoGeral(IList<EnumeradorDeMovimentoDoIndividuo> genes)
         {
-            IoC.ObterServico<InformacoesDaTela>().MelhorCaminho = String.Join("-",genes.Select(x => Enum.GetName(typeof(EnumeradorDeMovimentoDoIndividuo),x)));
+            _informacoesDaTela.MelhorCaminho = String.Join("-",genes.Select(x => Enum.GetName(typeof(EnumeradorDeMovimentoDoIndividuo),x)));
             await AtualizaTela();
         }
 
@@ -102,11 +114,9 @@ namespace ProjetoIA.Apresentacao.Controllers
 
         public async Task LimparInformacoes()
         {
-            var infoTela = IoC.ObterServico<InformacoesDaTela>();
-
-            infoTela.NumeroDeGeracoes = 0;
-            infoTela.Aptidao = null;
-            infoTela.MelhorCaminho = null;
+            _informacoesDaTela.NumeroDeGeracoes = 0;
+            _informacoesDaTela.Aptidao = null;
+            _informacoesDaTela.MelhorCaminho = null;
 
             await AtualizaTela();
         }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using ProjetoIA.Dominio.Base;
-
 using System.Windows;
 
 namespace ProjetoIA.Apresentacao
@@ -16,9 +14,9 @@ namespace ProjetoIA.Apresentacao
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
 
-            IoC.ServiceProvider = serviceCollection.BuildServiceProvider();
+            var provider = serviceCollection.BuildServiceProvider();
 
-            IoC.ObterServico<MainWindow>().Show();
+            provider.GetService<MainWindow>().Show();
         }
 
         private void ConfigureServices(IServiceCollection services)

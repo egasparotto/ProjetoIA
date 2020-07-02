@@ -1,5 +1,4 @@
-﻿using ProjetoIA.Dominio.Base;
-using ProjetoIA.Dominio.Individuos.Entidades;
+﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Enumeradores;
@@ -16,10 +15,18 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
     public class ServicoDeMovimentacaoDoIndividuo : IServicoDeMovimentacaoDoIndividuo
     {
 
+        private readonly IPonto _ponto;
+        private readonly IServicoDePenalidade _servicoDePenalidade;
+
+        public ServicoDeMovimentacaoDoIndividuo(IPonto ponto, IServicoDePenalidade servicoDePenalidade)
+        {
+            _ponto = ponto;
+            _servicoDePenalidade = servicoDePenalidade;
+        }
 
         public async Task<int> Mover(Individuo individuo, EnumeradorDeMovimentoDoIndividuo movimento)
         {
-            var penalidade = IoC.ObterServico<IServicoDePenalidade>().CalcularPenalidade(movimento, individuo.Localizacao);
+            var penalidade = _servicoDePenalidade.CalcularPenalidade(movimento, individuo.Localizacao);
 
             if(penalidade == EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto)
             {
@@ -50,10 +57,9 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
 
             individuo.Localizacao = (EnumeradorDeLocalizacaoDoIndividuo)novoLocal;
 
-            var ponto = IoC.ObterServico<IPonto>();
-            if(ponto != null)
+            if(_ponto != null)
             {
-                await ponto.DefinirLocalizacao(individuo);
+                await _ponto.DefinirLocalizacao(individuo);
             }
 
             return 0;

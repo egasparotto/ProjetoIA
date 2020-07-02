@@ -1,5 +1,5 @@
-﻿using ProjetoIA.Apresentacao.Models;
-using ProjetoIA.Dominio.Base;
+﻿using ProjetoIA.Apresentacao.Controllers;
+using ProjetoIA.Apresentacao.Models;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
@@ -20,10 +20,26 @@ namespace ProjetoIA.Apresentacao
     /// </summary>
     public partial class MainWindow : Window
     {
-        CancellationTokenSource tokenSource;
+        private CancellationTokenSource tokenSource;
+        private readonly InformacoesDaTela _informacoesDaTela;
+        private readonly IServicoDeAtualizacaoDeInterface _servicoDeAtualizacaoDeInterface;
+        private readonly AlgoritimoGenetico _algoritimoGenetico;
+        private readonly IPonto _ponto;
+        private readonly IServicoDeAlgoritimoGenetico _servicoDeAlgoritimoGenetico;
 
-        public MainWindow(InformacoesDaTela informacoesDaTela)
+        public MainWindow(InformacoesDaTela informacoesDaTela, 
+                          IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface, 
+                          AlgoritimoGenetico algoritimoGenetico, 
+                          IPonto ponto, 
+                          IServicoDeAlgoritimoGenetico servicoDeAlgoritimoGenetico)
         {
+            _servicoDeAtualizacaoDeInterface = servicoDeAtualizacaoDeInterface;
+            _algoritimoGenetico = algoritimoGenetico;
+            _ponto = ponto;
+            _servicoDeAlgoritimoGenetico = servicoDeAlgoritimoGenetico;
+            _informacoesDaTela = informacoesDaTela;
+            ((ServicoDeAtualizacaoDeInterface)_servicoDeAtualizacaoDeInterface).DefineMainWindow(this);
+
             InitializeComponent();
             DataContext = informacoesDaTela;
             tokenSource = new CancellationTokenSource();
@@ -39,32 +55,30 @@ namespace ProjetoIA.Apresentacao
             btnCancelar.IsEnabled = true;
             btnIniciar.IsEnabled = false;
 
-            var infoTela = IoC.ObterServico<InformacoesDaTela>();
 
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().LimparInformacoes();
+            await _servicoDeAtualizacaoDeInterface.LimparInformacoes();
 
-            IoC.ObterServico<AlgoritimoGenetico>().DefinirAlgoritimo(
+            _algoritimoGenetico.DefinirAlgoritimo(
                 new AlgoritimoGenetico()
                 {
                     Inicio = EnumeradorDeLocalizacaoDoIndividuo.Local0x3,
                     Solucao = EnumeradorDeLocalizacaoDoIndividuo.Local3x0,
-                    TaxaDeCrossover = infoTela.TaxaDeCrossover,
-                    TaxaDeMutacao = infoTela.TaxaDeMutacao,
+                    TaxaDeCrossover = _informacoesDaTela.TaxaDeCrossover,
+                    TaxaDeMutacao = _informacoesDaTela.TaxaDeMutacao,
                     NumeroDeGenes = 6,
-                    MaximoDeGeracoes = infoTela.MaximoDeGeracoes,
-                    Elitismo = infoTela.Elitismo,
-                    TamanhoDaPopulacao = infoTela.TamanhoDaPopulacao
+                    MaximoDeGeracoes = _informacoesDaTela.MaximoDeGeracoes,
+                    Elitismo = _informacoesDaTela.Elitismo,
+                    TamanhoDaPopulacao = _informacoesDaTela.TamanhoDaPopulacao
                 }
             );
 
-            var ponto = IoC.ObterServico<IPonto>();
-            await ponto.CriarPonto();
-            grdLabirinto.Children.Remove((Ponto)ponto);
-            grdLabirinto.Children.Add((Ponto)ponto);
+            await _ponto.CriarPonto();
+            grdLabirinto.Children.Remove((Ponto)_ponto);
+            grdLabirinto.Children.Add((Ponto)_ponto);
 
             await Task.Run(async () =>
             {
-                await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar(tokenSource.Token);
+                await _servicoDeAlgoritimoGenetico.Processar(tokenSource.Token);
             }, tokenSource.Token);
 
             tokenSource = new CancellationTokenSource();
@@ -73,7 +87,7 @@ namespace ProjetoIA.Apresentacao
             btnIniciar.IsEnabled = true;
         }
 
-        private async void btnCancelar_Click(object sender, RoutedEventArgs e)
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             tokenSource.Cancel();
         }

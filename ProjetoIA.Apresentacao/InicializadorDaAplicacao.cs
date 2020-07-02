@@ -17,12 +17,12 @@ namespace ProjetoIA.Apresentacao
     {
         public static IServiceCollection Executar(this IServiceCollection services)
         {
-            services.AddTransient<IServicoDeAtualizacaoDeInterface, ServicoDeAtualizacaoDeInterface>();
-            services.AddTransient<IServicoDeMovimentacaoDoIndividuo, ServicoDeMovimentacaoDoIndividuo>();
-            services.AddTransient<IServicoDePenalidade, ServicoDePenalidade>();
-            services.AddTransient<IServicoDeAlgoritimoGenetico, ServicoDeAlgoritimoGenetico>();
-            services.AddTransient<IServicoDeIndividuo, ServicoDeIndividuo>();
-            services.AddTransient<IServicoDePopulacao, ServicoDePopulacao>();
+            services.AddSingleton<IServicoDeAtualizacaoDeInterface, ServicoDeAtualizacaoDeInterface>();
+            services.AddSingleton<IServicoDeMovimentacaoDoIndividuo, ServicoDeMovimentacaoDoIndividuo>();
+            services.AddSingleton<IServicoDePenalidade, ServicoDePenalidade>();
+            services.AddSingleton<IServicoDeAlgoritimoGenetico, ServicoDeAlgoritimoGenetico>();
+            services.AddSingleton<IServicoDeIndividuo, ServicoDeIndividuo>();
+            services.AddSingleton<IServicoDePopulacao, ServicoDePopulacao>();
 
             services.AddSingleton<IPonto, Ponto>();
             services.AddSingleton<InformacoesDaTela>();

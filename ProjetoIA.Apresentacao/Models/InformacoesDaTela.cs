@@ -1,10 +1,6 @@
-﻿using ProjetoIA.Dominio.Base;
-using ProjetoIA.Dominio.Interface.Servicos;
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace ProjetoIA.Apresentacao.Models
 {

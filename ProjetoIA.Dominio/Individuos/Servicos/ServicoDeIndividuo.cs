@@ -1,5 +1,4 @@
-﻿using ProjetoIA.Dominio.Base;
-using ProjetoIA.Dominio.Individuos.Entidades;
+﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
@@ -13,6 +12,15 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
 {
     public class ServicoDeIndividuo : IServicoDeIndividuo
     {
+        private readonly IPonto _ponto;
+        private readonly IServicoDeMovimentacaoDoIndividuo _servicoDeMovimentacaoDoIndividuo;
+
+        public ServicoDeIndividuo(IPonto ponto, IServicoDeMovimentacaoDoIndividuo servicoDeMovimentacaoDoIndividuo)
+        {
+            _ponto = ponto;
+            _servicoDeMovimentacaoDoIndividuo = servicoDeMovimentacaoDoIndividuo;
+        }
+
         private IDictionary<EnumeradorDeLocalizacaoDoIndividuo, int> distanciaDaChegada = new Dictionary<EnumeradorDeLocalizacaoDoIndividuo, int>()
         {
             { EnumeradorDeLocalizacaoDoIndividuo.Local0x0, 3 },
@@ -36,14 +44,13 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
         public async Task CalcularAptidao(Individuo individuo)
         {
             int aptidao = -15;
-            var ponto = IoC.ObterServico<IPonto>();
-            if(ponto != null)
+            if(_ponto != null)
             {
-                await ponto.DefinirLocalizacao(individuo);
+                await _ponto.DefinirLocalizacao(individuo);
             }
             foreach (var movivento in individuo.Genes)
             {
-                aptidao += await IoC.ObterServico<IServicoDeMovimentacaoDoIndividuo>().Mover(individuo, movivento) + distanciaDaChegada[individuo.Localizacao];
+                aptidao += await _servicoDeMovimentacaoDoIndividuo.Mover(individuo, movivento) + distanciaDaChegada[individuo.Localizacao];
             }
             individuo.Aptidao = aptidao;
         }

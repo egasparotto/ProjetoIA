@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ProjetoIA.Dominio.Base;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Processamento.Entidades;
 using ProjetoIA.Dominio.Processamento.Servicos;
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,16 +19,16 @@ namespace ProjetoIA.Console
             //Configura DI
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
-            IoC.ServiceProvider = serviceCollection.BuildServiceProvider();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var repetir = true;
             while (repetir)
             {
-                await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().LimparInformacoes();
+                await serviceProvider.GetService<IServicoDeAtualizacaoDeInterface>().LimparInformacoes();
 
                 Clear();
 
-                await Executar();
+                await Executar(serviceProvider);
 
                 var aux = true ? "S" : "N";
 
@@ -49,7 +49,7 @@ namespace ProjetoIA.Console
 
         }
 
-        private static async Task Executar()
+        private static async Task Executar(IServiceProvider serviceProvider)
         {
             decimal taxaDeCrossover = 0.6m;
             decimal taxaDeMutacao = 0.3m;
@@ -101,7 +101,7 @@ namespace ProjetoIA.Console
                 }
             }
 
-            IoC.ObterServico<AlgoritimoGenetico>().DefinirAlgoritimo(
+            serviceProvider.GetService<AlgoritimoGenetico>().DefinirAlgoritimo(
             new AlgoritimoGenetico()
             {
                 Inicio = EnumeradorDeLocalizacaoDoIndividuo.Local0x3,
@@ -116,7 +116,7 @@ namespace ProjetoIA.Console
 
             var tokenSource = new CancellationTokenSource();
 
-            await IoC.ObterServico<IServicoDeAlgoritimoGenetico>().Processar(tokenSource.Token);
+            await serviceProvider.GetService<IServicoDeAlgoritimoGenetico>().Processar(tokenSource.Token);
         }
 
         private static void ConfigureServices(IServiceCollection services)

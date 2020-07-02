@@ -1,5 +1,4 @@
-﻿using ProjetoIA.Dominio.Base;
-using ProjetoIA.Dominio.Individuos.Entidades;
+﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
@@ -17,6 +16,15 @@ namespace ProjetoIA.Apresentacao.Models
     {
         private EnumeradorDeLocalizacaoDoIndividuo local;
 
+        private readonly IServicoDeAtualizacaoDeInterface _servicoDeAtualizacaoDeInterface;
+        private readonly AlgoritimoGenetico _algoritimoGenetico;
+
+        public Ponto(IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface, AlgoritimoGenetico algoritimoGenetico)
+        {
+            _servicoDeAtualizacaoDeInterface = servicoDeAtualizacaoDeInterface;
+            _algoritimoGenetico = algoritimoGenetico;
+        }
+
         public EnumeradorDeLocalizacaoDoIndividuo ObterLocalizacao()
         {
             return local;
@@ -25,7 +33,7 @@ namespace ProjetoIA.Apresentacao.Models
         public async Task DefinirLocalizacao(Individuo individuo)
         {
             local = individuo.Localizacao;
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
+            await _servicoDeAtualizacaoDeInterface.AtualizarLocalizacao(this);
         }
 
         public async Task CriarPonto()
@@ -40,8 +48,8 @@ namespace ProjetoIA.Apresentacao.Models
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
 
-            local = IoC.ObterServico<AlgoritimoGenetico>().Inicio;
-            await IoC.ObterServico<IServicoDeAtualizacaoDeInterface>().AtualizarLocalizacao(this);
+            local = _algoritimoGenetico.Inicio;
+            await _servicoDeAtualizacaoDeInterface.AtualizarLocalizacao(this);
         }
     }
 }

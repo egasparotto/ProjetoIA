@@ -1,5 +1,4 @@
-﻿using ProjetoIA.Dominio.Base;
-using ProjetoIA.Dominio.Individuos.Entidades;
+﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Populacoes.Entidades;
@@ -15,11 +14,13 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
 {
     public class ServicoDePopulacao : IServicoDePopulacao
     {
-        private readonly AlgoritimoGenetico algoritimo;
+        private readonly AlgoritimoGenetico _algoritimo;
+        private readonly IServicoDeIndividuo _servicoDeIndividuo;
 
-        public ServicoDePopulacao(AlgoritimoGenetico algoritimo)
+        public ServicoDePopulacao(AlgoritimoGenetico algoritimo, IServicoDeIndividuo servicoDeIndividuo)
         {
-            this.algoritimo = algoritimo;
+            _algoritimo = algoritimo;
+            _servicoDeIndividuo = servicoDeIndividuo;
         }
 
         public async Task<Populacao> NovaGeracao(Populacao populacao)
@@ -27,7 +28,7 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
             var tamanhoPopulacao = populacao.TamanhoDaPopulacao;
             var novaPopulacao = new Populacao();
 
-            if (algoritimo.Elitismo)
+            if (_algoritimo.Elitismo)
             {
                 novaPopulacao.Individuos.Add(populacao.Individuos.OrderBy(x => x.Aptidao).FirstOrDefault());
             }
@@ -36,14 +37,14 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
             {
                 var pais = SelecaoPorTorneio(populacao);
 
-                if (new Random().NextDouble() <= (double)algoritimo.TaxaDeCrossover)
+                if (new Random().NextDouble() <= (double)_algoritimo.TaxaDeCrossover)
                 {
                     novaPopulacao.Individuos.Add(Crossover(pais[0], pais[1]));
                 }
                 else
                 {
-                    novaPopulacao.Individuos.Add(new Individuo(pais[0].Genes, algoritimo.Inicio, algoritimo.TaxaDeMutacao));
-                    novaPopulacao.Individuos.Add(new Individuo(pais[1].Genes, algoritimo.Inicio, algoritimo.TaxaDeMutacao));
+                    novaPopulacao.Individuos.Add(new Individuo(pais[0].Genes, _algoritimo.Inicio, _algoritimo.TaxaDeMutacao));
+                    novaPopulacao.Individuos.Add(new Individuo(pais[1].Genes, _algoritimo.Inicio, _algoritimo.TaxaDeMutacao));
                 }
             }
 
@@ -56,7 +57,7 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
         {
             foreach (var individuo in populacao.Individuos)
             {
-                await IoC.ObterServico<IServicoDeIndividuo>().CalcularAptidao(individuo);
+                await _servicoDeIndividuo.CalcularAptidao(individuo);
             }
         }
 
@@ -103,7 +104,7 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
             {
                 genes.Add(movimento);
             }
-            return new Individuo(genes, algoritimo.Inicio, algoritimo.TaxaDeMutacao);
+            return new Individuo(genes, _algoritimo.Inicio, _algoritimo.TaxaDeMutacao);
         }
 
     }
