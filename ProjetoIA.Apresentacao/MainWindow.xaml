@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -48,7 +48,7 @@
                 <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding MaximoDeGeracoes}"/>
                 <Label Grid.Row="4" Grid.Column="0">Tamanho da População:</Label>
                 <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="1" Text="{Binding TamanhoDaPopulacao}"/>
-                <Label Grid.Row="5" Grid.Column="0">Atraso na Atualizacao da Tela:</Label>
+                <Label Grid.Row="5" Grid.Column="0">Modo Lento:</Label>
                 <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding AtrasoNaAtualizacao}"></CheckBox>
                 <Label Grid.Row="6" Grid.Column="0">Elitismo:</Label>
                 <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Elitismo}"></CheckBox>
