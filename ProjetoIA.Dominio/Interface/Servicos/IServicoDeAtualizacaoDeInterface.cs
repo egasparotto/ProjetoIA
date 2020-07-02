@@ -1,5 +1,6 @@
 ﻿using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Ponto.Entidades;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

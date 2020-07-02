@@ -1,4 +1,5 @@
 ﻿using ProjetoIA.Dominio.Populacoes.Entidades;
+
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Populacoes.Servicos

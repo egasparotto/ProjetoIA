@@ -1,9 +1,5 @@
 ﻿using ProjetoIA.Dominio.Individuos.Enumeradores;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace ProjetoIA.Dominio.Processamento.Entidades
 {
     public class AlgoritimoGenetico

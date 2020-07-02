@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Processamento.Entidades;

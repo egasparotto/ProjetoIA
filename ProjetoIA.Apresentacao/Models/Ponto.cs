@@ -3,7 +3,6 @@ using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Processamento.Entidades;
-using ProjetoIA.Dominio.Processamento.Servicos;
 
 using System.Threading.Tasks;
 using System.Windows;

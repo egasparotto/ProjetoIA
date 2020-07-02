@@ -1,13 +1,10 @@
 ﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
-using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Penalidade.Enumeradores;
 using ProjetoIA.Dominio.Penalidades.Servico;
 using ProjetoIA.Dominio.Ponto.Entidades;
 
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Movimentacao.Servicos
@@ -28,7 +25,7 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
         {
             var penalidade = _servicoDePenalidade.CalcularPenalidade(movimento, individuo.Localizacao);
 
-            if(penalidade == EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto)
+            if (penalidade == EnumeradorDeResultadoDaMovimentacao.ForaDoLabirinto)
             {
                 return 200;
             }
@@ -57,7 +54,7 @@ namespace ProjetoIA.Dominio.Movimentacao.Servicos
 
             individuo.Localizacao = (EnumeradorDeLocalizacaoDoIndividuo)novoLocal;
 
-            if(_ponto != null)
+            if (_ponto != null)
             {
                 await _ponto.DefinirLocalizacao(individuo);
             }

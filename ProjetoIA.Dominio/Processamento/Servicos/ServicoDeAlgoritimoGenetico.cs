@@ -4,10 +4,7 @@ using ProjetoIA.Dominio.Populacoes.Entidades;
 using ProjetoIA.Dominio.Populacoes.Servicos;
 using ProjetoIA.Dominio.Processamento.Entidades;
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,7 +39,7 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
 
             int? melhorAptidao = null;
 
-            for (int i = 1; !temSolucao && i <= _algoritimo.MaximoDeGeracoes && !token.IsCancellationRequested ; i++)
+            for (int i = 1; !temSolucao && i <= _algoritimo.MaximoDeGeracoes && !token.IsCancellationRequested; i++)
             {
                 await _servicoDeAtualizacaoDeInterface.IncrementarGeracao();
 
@@ -57,7 +54,7 @@ namespace ProjetoIA.Dominio.Processamento.Servicos
                 {
                     temSolucao = true;
                 }
-                if(melhorAptidao >= melhorIndividuoLocal.Aptidao || melhorAptidao == null)
+                if (melhorAptidao >= melhorIndividuoLocal.Aptidao || melhorAptidao == null)
                 {
                     melhorAptidao = melhorIndividuoLocal.Aptidao;
                     await _servicoDeAtualizacaoDeInterface.DefinirMelhorAptidaoGeral(melhorAptidao.Value);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjetoIA.Dominio.Penalidade.Enumeradores
+﻿namespace ProjetoIA.Dominio.Penalidade.Enumeradores
 {
     public enum EnumeradorDeResultadoDaMovimentacao
     {

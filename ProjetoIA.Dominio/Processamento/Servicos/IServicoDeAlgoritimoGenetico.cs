@@ -1,5 +1,4 @@
-﻿using ProjetoIA.Dominio.Processamento.Entidades;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Processamento.Servicos

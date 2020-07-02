@@ -4,7 +4,6 @@ using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Ponto.Entidades;
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -47,7 +46,7 @@ namespace ProjetoIA.Apresentacao.Controllers
                     Grid.SetColumn((Ponto)ponto, 3);
                 }
                 Grid.SetRow((Ponto)ponto, (int)ponto.ObterLocalizacao() % 4);
-          
+
                 await AtualizaTela(true);
             }));
         }
@@ -98,7 +97,7 @@ namespace ProjetoIA.Apresentacao.Controllers
 
         public async Task DefineMelhorCaminhoGeral(IList<EnumeradorDeMovimentoDoIndividuo> genes)
         {
-            _informacoesDaTela.MelhorCaminho = String.Join("-",genes.Select(x => Enum.GetName(typeof(EnumeradorDeMovimentoDoIndividuo),x)));
+            _informacoesDaTela.MelhorCaminho = String.Join("-", genes.Select(x => Enum.GetName(typeof(EnumeradorDeMovimentoDoIndividuo), x)));
             await AtualizaTela();
         }
 

@@ -2,10 +2,10 @@
 using ProjetoIA.Apresentacao.Models;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
 using ProjetoIA.Dominio.Interface.Servicos;
-using ProjetoIA.Dominio.Movimentacao.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
 using ProjetoIA.Dominio.Processamento.Entidades;
 using ProjetoIA.Dominio.Processamento.Servicos;
+
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,10 +27,10 @@ namespace ProjetoIA.Apresentacao
         private readonly IPonto _ponto;
         private readonly IServicoDeAlgoritimoGenetico _servicoDeAlgoritimoGenetico;
 
-        public MainWindow(InformacoesDaTela informacoesDaTela, 
-                          IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface, 
-                          AlgoritimoGenetico algoritimoGenetico, 
-                          IPonto ponto, 
+        public MainWindow(InformacoesDaTela informacoesDaTela,
+                          IServicoDeAtualizacaoDeInterface servicoDeAtualizacaoDeInterface,
+                          AlgoritimoGenetico algoritimoGenetico,
+                          IPonto ponto,
                           IServicoDeAlgoritimoGenetico servicoDeAlgoritimoGenetico)
         {
             _servicoDeAtualizacaoDeInterface = servicoDeAtualizacaoDeInterface;

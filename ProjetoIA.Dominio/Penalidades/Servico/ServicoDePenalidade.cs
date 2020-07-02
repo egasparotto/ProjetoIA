@@ -2,9 +2,7 @@
 using ProjetoIA.Dominio.Movimentacao.Enumeradores;
 using ProjetoIA.Dominio.Penalidade.Enumeradores;
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProjetoIA.Dominio.Penalidades.Servico
 {

@@ -1,11 +1,9 @@
 ﻿using ProjetoIA.Dominio.Individuos.Entidades;
 using ProjetoIA.Dominio.Individuos.Enumeradores;
-using ProjetoIA.Dominio.Interface.Servicos;
 using ProjetoIA.Dominio.Movimentacao.Servicos;
 using ProjetoIA.Dominio.Ponto.Entidades;
-using System;
+
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjetoIA.Dominio.Individuos.Servicos
@@ -44,7 +42,7 @@ namespace ProjetoIA.Dominio.Individuos.Servicos
         public async Task CalcularAptidao(Individuo individuo)
         {
             int aptidao = -15;
-            if(_ponto != null)
+            if (_ponto != null)
             {
                 await _ponto.DefinirLocalizacao(individuo);
             }
