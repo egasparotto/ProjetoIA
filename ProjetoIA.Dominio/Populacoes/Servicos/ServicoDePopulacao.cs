@@ -90,21 +90,37 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
 
         private Individuo Crossover(Individuo individuo1, Individuo individuo2)
         {
-            IList<EnumeradorDeMovimentoDoIndividuo> genes = new List<EnumeradorDeMovimentoDoIndividuo>();
-            foreach (var movimento in individuo1.Genes.Take(2))
+            var pontosDeCorte = GeraPontosDeCorteRandomicos();
+
+            pontosDeCorte.Add(6);
+
+            List<EnumeradorDeMovimentoDoIndividuo> genes = new List<EnumeradorDeMovimentoDoIndividuo>();
+            var ultimoIndivuo = 2;
+            var registrosInseridos = 0;
+            foreach (var ponto in pontosDeCorte)
             {
-                genes.Add(movimento);
+                IEnumerable<EnumeradorDeMovimentoDoIndividuo> genesInseridos;
+                if(ultimoIndivuo == 2)
+                {
+                    genesInseridos = individuo1.Genes.Skip(registrosInseridos).Take(ponto - registrosInseridos);
+                    ultimoIndivuo = 1;
+                }
+                else
+                {
+                    genesInseridos = individuo2.Genes.Skip(registrosInseridos).Take(ponto - registrosInseridos);
+                    ultimoIndivuo = 2;
+                }
+                registrosInseridos += genesInseridos.Count();
+                genes.AddRange(genesInseridos);
             }
-            foreach (var movimento in individuo2.Genes.Skip(2).Take(2))
-            {
-                genes.Add(movimento);
-            }
-            foreach (var movimento in individuo1.Genes.Skip(4).Take(2))
-            {
-                genes.Add(movimento);
-            }
+
             return new Individuo(genes, _algoritimo.Inicio, _algoritimo.TaxaDeMutacao);
         }
 
+        private IList<int> GeraPontosDeCorteRandomicos()
+        {
+            var rnd = new Random();
+            return Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(2).OrderBy(x => x).ToList();
+        }
     }
 }
