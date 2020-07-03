@@ -12,6 +12,7 @@ namespace ProjetoIA.Dominio.Processamento.Entidades
         public int MaximoDeGeracoes { get; set; }
         public bool Elitismo { get; set; }
         public int TamanhoDaPopulacao { get; set; }
+        public int PontosDeCorte { get; set; }
 
         public void DefinirAlgoritimo(AlgoritimoGenetico algoritimo)
         {
@@ -23,6 +24,8 @@ namespace ProjetoIA.Dominio.Processamento.Entidades
             MaximoDeGeracoes = algoritimo.MaximoDeGeracoes;
             Elitismo = algoritimo.Elitismo;
             TamanhoDaPopulacao = algoritimo.TamanhoDaPopulacao;
+            PontosDeCorte = algoritimo.PontosDeCorte;
+            
         }
     }
 }

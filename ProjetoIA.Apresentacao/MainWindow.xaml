@@ -37,6 +37,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0">Numero de Gerações: </Label>
                 <Label Content="{Binding Path=NumeroDeGeracoes, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"></Label>
@@ -56,6 +57,8 @@
                 <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="7" Grid.Column="1" Text="{Binding TaxaDeMutacao}"/>
                 <Label Grid.Row="8" Grid.Column="0">Taxa de Crossover:</Label>
                 <TextBox PreviewTextInput="DecimalValidationTextBox" Grid.Row="8" Grid.Column="1" Text="{Binding TaxaDeCrossover}"/>
+                <Label Grid.Row="9" Grid.Column="0">Pontos de corte:</Label>
+                <TextBox PreviewTextInput="ValidadorDePontosDeCorte" Grid.Row="9" Grid.Column="1" Text="{Binding PontosDeCorte}"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

@@ -68,7 +68,8 @@ namespace ProjetoIA.Apresentacao
                     NumeroDeGenes = 6,
                     MaximoDeGeracoes = _informacoesDaTela.MaximoDeGeracoes,
                     Elitismo = _informacoesDaTela.Elitismo,
-                    TamanhoDaPopulacao = _informacoesDaTela.TamanhoDaPopulacao
+                    TamanhoDaPopulacao = _informacoesDaTela.TamanhoDaPopulacao,
+                    PontosDeCorte = _informacoesDaTela.PontosDeCorte
                 }
             );
 
@@ -97,6 +98,13 @@ namespace ProjetoIA.Apresentacao
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void ValidadorDePontosDeCorte(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^1-5]");
+            e.Handled = regex.IsMatch(e.Text) || ((TextBox)sender).Text.Length >= 1;
+        }
+
         private void DecimalValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             bool approvedDecimalPoint = false;

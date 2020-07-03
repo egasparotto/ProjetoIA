@@ -57,6 +57,7 @@ namespace ProjetoIA.Console
             int maximoDeGeracoes = 600;
             bool elitismo = true;
             int tamanhoDaPopulacao = 200;
+            int numeroDePontosDeCorte = 3;
 
             WriteLine($"Qual a taxa de Crossover[{taxaDeCrossover}]: ");
             string aux = ReadLine();
@@ -102,6 +103,14 @@ namespace ProjetoIA.Console
                 }
             }
 
+            WriteLine($"Qual o número de pontos de corte[{numeroDePontosDeCorte}]: ");
+            aux = ReadLine();
+            if (!string.IsNullOrEmpty(aux) && int.TryParse(aux, out saidaInt))
+            {
+                numeroDePontosDeCorte = saidaInt;
+            }
+
+
             serviceProvider.GetService<AlgoritimoGenetico>().DefinirAlgoritimo(
             new AlgoritimoGenetico()
             {
@@ -112,7 +121,8 @@ namespace ProjetoIA.Console
                 NumeroDeGenes = 6,
                 MaximoDeGeracoes = maximoDeGeracoes,
                 Elitismo = elitismo,
-                TamanhoDaPopulacao = tamanhoDaPopulacao
+                TamanhoDaPopulacao = tamanhoDaPopulacao,
+                PontosDeCorte = numeroDePontosDeCorte
             });
 
             var tokenSource = new CancellationTokenSource();

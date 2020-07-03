@@ -57,6 +57,7 @@ namespace ProjetoIA.Apresentacao.Models
         public bool Elitismo { get; set; }
         public decimal TaxaDeMutacao { get; set; }
         public decimal TaxaDeCrossover { get; set; }
+        public int PontosDeCorte { get; set; }
 
         public InformacoesDaTela()
         {
@@ -68,6 +69,7 @@ namespace ProjetoIA.Apresentacao.Models
             Elitismo = true;
             TaxaDeMutacao = 0.3m;
             TaxaDeCrossover = 0.6m;
+            PontosDeCorte = 3;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

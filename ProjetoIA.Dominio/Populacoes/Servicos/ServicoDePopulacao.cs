@@ -120,7 +120,7 @@ namespace ProjetoIA.Dominio.Populacoes.Servicos
         private IList<int> GeraPontosDeCorteRandomicos()
         {
             var rnd = new Random();
-            return Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(2).OrderBy(x => x).ToList();
+            return Enumerable.Range(1, 5).OrderBy(x => rnd.Next()).Take(_algoritimo.PontosDeCorte).OrderBy(x => x).ToList();
         }
     }
 }
