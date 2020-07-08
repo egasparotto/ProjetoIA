@@ -64,12 +64,12 @@ namespace ProjetoIA.Apresentacao.Models
             Aptidao = null;
             NumeroDeGeracoes = 0;
             MaximoDeGeracoes = 600;
-            TamanhoDaPopulacao = 200;
+            TamanhoDaPopulacao = 100;
             AtrasoNaAtualizacao = false;
             Elitismo = true;
-            TaxaDeMutacao = 0.3m;
-            TaxaDeCrossover = 0.6m;
-            PontosDeCorte = 3;
+            TaxaDeMutacao = 0.9m;
+            TaxaDeCrossover = 0.8m;
+            PontosDeCorte = 2;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

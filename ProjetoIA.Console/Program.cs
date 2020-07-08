@@ -52,11 +52,11 @@ namespace ProjetoIA.Console
 
         private static async Task Executar(IServiceProvider serviceProvider)
         {
-            decimal taxaDeCrossover = 0.6m;
-            decimal taxaDeMutacao = 0.3m;
+            decimal taxaDeCrossover = 0.8m;
+            decimal taxaDeMutacao = 0.9m;
             int maximoDeGeracoes = 600;
             bool elitismo = true;
-            int tamanhoDaPopulacao = 200;
+            int tamanhoDaPopulacao = 100;
             int numeroDePontosDeCorte = 3;
 
             WriteLine($"Qual a taxa de Crossover[{taxaDeCrossover}]: ");
